@@ -10,6 +10,7 @@ app.set('port',port);
 const server = http.createServer(app);
 
 server.listen(port);
+server.on('listening ', onListening);
 
 console.log('API rodando na porta ' + port);   
 
@@ -26,3 +27,11 @@ function normalizePort(val){
 
     return false;
 } 
+
+function onListening(){
+    const addr = server.address();
+    const bind = typeof addr === 'string'
+        ? 'pipe ' + addr
+        : 'port ' + addr.port;
+    debug('Listening on: ' + bind); 
+}
