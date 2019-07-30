@@ -8,7 +8,10 @@ const app = express();
 const router = express.Router();
 
 //db connection
-mongoose.connect('mongodb+srv://feelipemendes:Bia%402019@cluster01-aibnj.mongodb.net/test?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://bia:bia@cluster01-aibnj.mongodb.net/test');
+
+//models
+const Planet = require('./models/planet');
 
 //routes
 const indexRoute = require('./routes/index-route');

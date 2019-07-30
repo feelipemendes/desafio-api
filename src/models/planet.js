@@ -6,16 +6,16 @@
  const schema = new Schema({
      name: {
          type: String,
-         required: true,
+         required: [true,'O campo name é obrigatório'],
          unique: true
      },
      weather: {
          type: String,
-         required: true
+         required: [true, 'O campo weather é obrigatório']
      },
      land: {
          type: String,
-         required: true
+         required: [true, 'O campo land é obrigatório']
      }
  });
 
