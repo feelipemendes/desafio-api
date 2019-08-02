@@ -3,6 +3,19 @@
 const mongoose = require('mongoose');
 const Planet = mongoose.model('Planet');
 
+exports.get = (req, res, next) => {
+    Planet
+        .find({})
+        .then(data => {
+            res.status(200).send(data);
+        }).catch(e => {
+            res.status(400).send({
+                 message: 'Falha ao cadastrar o produto!',
+                 data: e
+            });
+        });
+}
+
 exports.post = (req, res, next) => {
     var planet = new Planet(req.body);
      planet
