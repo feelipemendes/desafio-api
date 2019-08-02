@@ -3,6 +3,34 @@
 const mongoose = require('mongoose');
 const Planet = mongoose.model('Planet');
 
+exports.getById = (req, res, next) => {
+    Planet
+        .findById(req.params.id)
+        .then(data => {
+            res.status(200).send(data);
+        }).catch(e => {
+            res.status(400).send({
+                 message: 'Falha ao consultar o planeta pelo Id!',
+                 data: e
+            });
+        });
+}
+
+exports.getByName = (req, res, next) => {
+    Planet
+        .find({
+            name: req.params.name
+        })
+        .then(data => {
+            res.status(200).send(data);
+        }).catch(e => {
+            res.status(400).send({
+                 message: 'Falha ao consultar o planeta pelo nome!',
+                 data: e
+            });
+        });
+}
+
 exports.get = (req, res, next) => {
     Planet
         .find({})
@@ -10,7 +38,7 @@ exports.get = (req, res, next) => {
             res.status(200).send(data);
         }).catch(e => {
             res.status(400).send({
-                 message: 'Falha ao cadastrar o produto!',
+                 message: 'Falha ao listar o planeta!',
                  data: e
             });
         });
@@ -21,10 +49,10 @@ exports.post = (req, res, next) => {
      planet
         .save()
         .then(x => {
-            res.status(201).send({ message: 'Produto cadastrado com sucesso!'});
+            res.status(201).send({ message: 'Planeta cadastrado com sucesso!'});
         }).catch(e => {
             res.status(400).send({
-                 message: 'Falha ao cadastrar o produto!',
+                 message: 'Falha ao cadastrar o planeta!',
                  data: e
             });
         });
