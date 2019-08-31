@@ -4,6 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+const api_helper = require('./helpers/API_Helpers');
+
 const app = express();
 const router = express.Router();
 
@@ -22,6 +24,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', indexRoute );
 app.use('/planets', planetRoute);
+
+app.get('/getAPIResponse', (req, res) => {
+	api_helper.make_API_call('https://swapi.co/api/planets/name/')
+	.then(response => {
+		res.json(response)
+	})
+	.catch(error => {
+		res.send(error)
+	})
+})
 
 module.exports = app;
  

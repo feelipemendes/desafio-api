@@ -16,6 +16,9 @@
      land: {
          type: String,
          required: [true, 'O campo land é obrigatório']
+     },
+     films: {
+         type: Number
      }
  });
 

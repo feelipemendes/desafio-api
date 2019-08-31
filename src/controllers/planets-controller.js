@@ -33,7 +33,7 @@ exports.getByName = (req, res, next) => {
 
 exports.get = (req, res, next) => {
     Planet
-        .find({})
+        .find({}, 'name weather land')
         .then(data => {
             res.status(200).send(data);
         }).catch(e => {
@@ -67,5 +67,17 @@ exports.put = (req, res, next) => {
 };
 
 exports.delete = (req, res, next) => {
-    res.status(200).send(req.body);
+    Planet
+        .findOneAndRemove(req.body.id)
+        .then(x => {
+            res.status(200).send({
+                message: 'Planeta removido.'
+            });
+        }).catch(e => {
+            res.status(400).send({
+                message: 'Falha ao deletar planeta.',
+                data: e
+            });
+        });
 };
+
